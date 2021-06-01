@@ -8,6 +8,9 @@ function App() {
     <div>
       <Router>
         <Switch>
+          <Route path={"/signin"}>
+            <SignIn &>
+          </Route>
           <Route path={"/"}>
             <Home />
           </Route>
