@@ -3,12 +3,17 @@
   margin: 0;
 }
 
-.nav-box{
-  width: 100vw;
-  height: 75px;
-  background-color: aquamarine;
-}
-.link-box{
+.bg{
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  background-color: brown;
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+.form-box{
+  background-color: chocolate;
+  min-height: 800px;
+  width: 500px;
 }

@@ -1,13 +1,16 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
+import { auth } from "../firebase"
 
 
 const Home = () => {
 
   return (
     <div>
-      <p>sign in</p>
-      <Link to="/signin"></Link>
+      
+      <Link to="/signup">sign up</Link>
+      <br />
+      <Link to="/login">sign in</Link>
     </div>
   )
 }
