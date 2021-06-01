@@ -1,0 +1,14 @@
+/*main css*/
+*{
+  margin: 0;
+}
+
+.nav-box{
+  width: 100vw;
+  height: 75px;
+  background-color: aquamarine;
+}
+.link-box{
+  display: flex;
+  justify-content: center;
+}
