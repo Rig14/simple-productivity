@@ -26,36 +26,25 @@ function App() {
   const logout = () => {
     auth.signOut(); 
   }
-  const y = () => {
-    console.log(auth.currentUser?.uid);
-  }
 
   return (
     <div>
-      {/*
-      This is the router setup.
-      When the url changes to one of below routes, the page is
-      rerendered.
-
-      It is advised to put new pages on top of the code.
-      */}
       <button onClick={logout}>Sign out</button>
-      <button onClick={y}>getuser</button>
-      {user ? <h1>User is signed in</h1> : <h1>user is not signed in</h1>}
       <Router>
         <Switch>
+
           <Route path={"/login"}>
             <Login />
           </Route>
+
           <Route path={"/signup"}>
             <SignUp />
           </Route>
-          {/*
-          for example this renders the home page.
-          */}
+
           <Route path={"/"}>
             <Home />
           </Route>
+
         </Switch>
       </Router>
     </div>

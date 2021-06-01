@@ -1,9 +1,13 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
+import { useHistory } from 'react-router';
 import { auth } from '../firebase';
 
 const SignIn = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+
+  const [error, setError] = useState(<></>)
+  const history = useHistory()
 
   const signUp = (e: any) => {
     if (emailRef?.current?.value != null && passwordRef?.current?.value != null) {
@@ -12,9 +16,24 @@ const SignIn = () => {
         emailRef.current.value,
         passwordRef.current.value
       ).then(user =>{
-        console.log(user);
+        history.push("/home")
       }).catch(err=>{
-        console.log(err);
+        const invalidEmail = "auth/invalid-email";
+        const weakPassword = "auth/weak-password";
+        const emailExists = "auth/email-already-exists";
+
+        const error = err.code
+
+        switch (error) {
+          case invalidEmail:
+            setError(<p>The email you entered is not in the correct format. Please check.</p>)
+            break;
+          case weakPassword:
+            setError(<p>Password is too weak.</p>)
+            break;
+          case emailExists:
+            setError(<p>The provided email is already in use.</p>)
+        }
       })
     }
   }
@@ -31,7 +50,7 @@ const SignIn = () => {
         <input type="password" 
         ref={passwordRef}
         placeholder="Enter your password..."/>
-
+        {error}
         <button onClick={signUp}>Create an account</button>
       </div>
     </div>
