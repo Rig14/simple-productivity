@@ -8,6 +8,7 @@ import SignUp from './pages/Signup';
 
 function App() {
   const [user, setUser] = useState<{uid: null | string | undefined, email: null | string | undefined}>({ uid: null, email: null })
+
   useEffect(() => {
     const unsubscribe =  auth.onAuthStateChanged(userAuth => {
       const user = {
@@ -23,16 +24,12 @@ function App() {
     return unsubscribe
   }, [])
 
-  const logout = () => {
-    auth.signOut(); 
-  }
+
 
   return (
     <div>
-      <button onClick={logout}>Sign out</button>
       <Router>
         <Switch>
-
           <Route path={"/login"}>
             <Login />
           </Route>
@@ -40,7 +37,6 @@ function App() {
           <Route path={"/signup"}>
             <SignUp />
           </Route>
-
           <Route path={"/"}>
             <Home />
           </Route>

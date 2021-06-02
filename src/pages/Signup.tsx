@@ -2,25 +2,29 @@ import React, { useRef, useState } from 'react'
 import { useHistory } from 'react-router';
 import { auth } from '../firebase';
 
-const SignIn = () => {
+const SignUp = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
   const [error, setError] = useState(<></>)
+  const [signupButton, setSignupButton] = useState(true);
   const history = useHistory()
 
   const signUp = (e: any) => {
     if (emailRef?.current?.value != null && passwordRef?.current?.value != null) {
       e.preventDefault();
+      setSignupButton(false);
       auth.createUserWithEmailAndPassword(
         emailRef.current.value,
         passwordRef.current.value
       ).then(user =>{
+        setSignupButton(true);
         history.push("/home")
       }).catch(err=>{
         const invalidEmail = "auth/invalid-email";
         const weakPassword = "auth/weak-password";
         const emailExists = "auth/email-already-exists";
+        const emailInUse = "auth/email-already-in-use";
 
         const error = err.code
 
@@ -31,11 +35,22 @@ const SignIn = () => {
           case weakPassword:
             setError(<p>Password is too weak.</p>)
             break;
+          case emailInUse: 
           case emailExists:
             setError(<p>The provided email is already in use.</p>)
+        
+        setSignupButton(true)
         }
       })
     }
+  }
+
+  let button = <button onClick={signUp}>Create an account</button>
+
+  if (signupButton) {
+    button = <button onClick={signUp}>Create an account</button>
+  } else {
+    button = <button onClick={signUp} disabled>Create an account</button>
   }
 
   return (
@@ -51,10 +66,10 @@ const SignIn = () => {
         ref={passwordRef}
         placeholder="Enter your password..."/>
         {error}
-        <button onClick={signUp}>Create an account</button>
+        {button}
       </div>
     </div>
   )
 }
 
-export default SignIn
+export default SignUp

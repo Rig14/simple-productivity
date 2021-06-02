@@ -17,3 +17,65 @@
   min-height: 800px;
   width: 500px;
 }
+
+.nav-box{
+  width: 100vw;
+  height: 75px;
+  background-color: brown;
+  display: flex;
+}
+.logo-icon-box{
+  width: 100px;
+  height: 100%;
+  margin-right: auto;
+}
+.logo-icon-box img{
+  width: 100px;
+  height: 100%;
+}
+.menu-button-box{
+  width: 75px;
+  height: 100%;
+  margin-left: auto;
+  position: relative;
+  display: flex;
+}
+.menu-button-box button{
+  width: 60px;
+  height: 60px;
+  padding: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  align-self: center;
+  border-radius: 10px;
+}
+.menu-button-box button:hover{
+  background-color: rgb(133, 27, 27);
+}
+.menu-button-box button:active{
+  border: rgb(211, 86, 86) 3px solid;
+}
+.menu-button-box button img{
+  width: 30px;
+  height: 30px;
+  position: relative;
+  bottom: -2px;
+}
+@keyframes nav-menu-slidein {
+  from{left: -100vw;}
+  to{left: 0vw;}
+}
+@keyframes nav-menu-slideout {
+  from{left: 0vw;}
+  to{left: -100vw;}
+}
+.navigation-menu{
+  position: fixed;
+  display: inline-block;
+  width: 100vw;
+  height: 100vh;
+  background-color: brown;
+  animation: nav-menu-slidein .3s;
+  z-index: 200;
+}

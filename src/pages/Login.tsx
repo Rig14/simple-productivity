@@ -25,27 +25,42 @@ const Login = () => {
       }).catch(err=>{
         const wrongPassword: String = "auth/wrong-password";
         const wrongEmail: String = "auth/user-not-found";
+        const invalidEmail: String = "auth/invalid-email"
 
-        const error = err.code
+        const error = err.code;
 
         switch (error) {
           case wrongEmail:
-            setError(<p>Your email and password do not match. Please try again.</p>)
+            setError(<p>Your email and password do not match. Please try again.</p>);
             break;
           case wrongPassword:
-            setError(<p>Your password does not match. Please try again.</p>)
+            setError(<p>Your password does not match. Please try again.</p>);
+            break;
+          case invalidEmail:
+            setError(<p>Email is not valid</p>);
+            break;
         }
+        const emailLength = emailRef.current?.value.length;
+        const passwordLength = passwordRef.current?.value.length;
+
+        if (emailLength === 0 && passwordLength === 0) {
+          setError(<p>Please enter your email and password</p>)
+        } else if (emailLength === 0) {
+          setError(<p>Email required</p>);
+        } else if (passwordLength === 0) {
+          setError(<p>Password required</p>)
+        } 
+
+        setLoginButton(true);
       })
-      
     }
   }
+
   if (loginButton) {
     button = <button onClick={login}>Login</button>
   } else {
     button = <button onClick={login} disabled>Login</button>
   }
-  
-  
 
   return (
     <div className="bg">
