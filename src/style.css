@@ -23,6 +23,7 @@
   height: 75px;
   background-color: brown;
   display: flex;
+  border-bottom: 1px solid black;
 }
 .logo-icon-box{
   width: 100px;
@@ -78,4 +79,47 @@
   background-color: brown;
   animation: nav-menu-slidein .3s;
   z-index: 200;
+}
+.logged-out-links{
+  display: flex;
+  flex-direction: column;
+  margin-top: 25px;
+}
+.logged-out-links a {
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 5px 20px 5px 20px;
+  text-decoration: none;
+  color: white;
+}
+.logged-out-links .login-link{
+  background-color: rgb(136, 25, 25);
+}
+.logged-out-links .signup-link{
+  background-color: rgb(46, 46, 133);
+}
+.logged-out-links .signup-link:hover {
+  background-color: rgb(69, 69, 133);
+}
+.logged-out-links .login-link:hover {
+  background-color: rgb(151, 28, 28);
+}
+
+
+
+.content{
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+}
+.navbar-link{
+  margin: 5px 30px 15px 30px;
+  padding-bottom: 15px;
+  font-size: 15pt;
+  text-decoration: none;
+  border-bottom: 1px solid rgb(131, 131, 131);
+}
+a.navbar-link{
+  color: white;
 }

@@ -25,9 +25,13 @@ const Login = () => {
       }).catch(err=>{
         const wrongPassword: String = "auth/wrong-password";
         const wrongEmail: String = "auth/user-not-found";
-        const invalidEmail: String = "auth/invalid-email"
+        const invalidEmail: String = "auth/invalid-email";
+        const tooManyRequests: String = "auth/too-many-requests";
 
         const error = err.code;
+
+        console.log(error);
+        console.log(err);
 
         switch (error) {
           case wrongEmail:
@@ -39,6 +43,8 @@ const Login = () => {
           case invalidEmail:
             setError(<p>Email is not valid</p>);
             break;
+          case tooManyRequests:
+            setError(<p>Access to this account has been temporarily disabled due to many failed login attempts.</p>)
         }
         const emailLength = emailRef.current?.value.length;
         const passwordLength = passwordRef.current?.value.length;
@@ -56,6 +62,10 @@ const Login = () => {
     }
   }
 
+  const back = () => {
+    history.goBack();
+  }
+
   if (loginButton) {
     button = <button onClick={login}>Login</button>
   } else {
@@ -65,6 +75,7 @@ const Login = () => {
   return (
     <div className="bg">
       <div className="form-box">
+        <button onClick={back}>X</button>
         <h1>Login</h1>
         <input type="email" 
         ref={emailRef}

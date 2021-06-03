@@ -35,14 +35,23 @@ const Navbar = () => {
   
   const logout = () => {
     auth.signOut(); 
-    window.location.reload();
   }
 
   //changes the link to login if user is not logged in. otherwise it is a sign out button
   if (isUserLoggedIn) {
-    logoutOrSignin = <button onClick={logout}>Sign out</button>;
+    logoutOrSignin = 
+    <>
+      <Link to="/account" className="navbar-link">Account</Link>
+
+      <button onClick={logout} className="logoff-button">Sign out</button>
+    </>;
+    
   } else {
-    logoutOrSignin = <Link to={"/login"}>Login</Link>;
+    logoutOrSignin = 
+    <div className="logged-out-links">
+      <Link to={"/login"} className="login-link">Login</Link>
+      <Link to={"/signup"} className="signup-link">Create an account</Link>
+    </div>;
   }
 
   //navigation menu
@@ -62,7 +71,9 @@ const Navbar = () => {
         </div>
       </div>
       <div className="content">
-
+        <Link to="/pomodoro" className="navbar-link">Pomodoro</Link>
+        <Link to="/todo" className="navbar-link">Todo List</Link>
+        <Link to="/graphs" className="navbar-link">Graphs</Link>
         {/*
         changing button
         */}

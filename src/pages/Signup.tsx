@@ -21,12 +21,15 @@ const SignUp = () => {
         setSignupButton(true);
         history.push("/home")
       }).catch(err=>{
+        setSignupButton(true)
+
         const invalidEmail = "auth/invalid-email";
         const weakPassword = "auth/weak-password";
         const emailExists = "auth/email-already-exists";
         const emailInUse = "auth/email-already-in-use";
 
         const error = err.code
+        console.log(error);
 
         switch (error) {
           case invalidEmail:
@@ -38,11 +41,13 @@ const SignUp = () => {
           case emailInUse: 
           case emailExists:
             setError(<p>The provided email is already in use.</p>)
-        
-        setSignupButton(true)
         }
       })
     }
+  }
+
+  const back = () => {
+    history.goBack();
   }
 
   let button = <button onClick={signUp}>Create an account</button>
@@ -56,6 +61,7 @@ const SignUp = () => {
   return (
     <div className="bg">
       <div className="form-box">
+        <button onClick={back}>X</button>
         <h1>Create an account</h1>
         <p>Gain access to additional features 
           such as Graphs and Saves.</p>

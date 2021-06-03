@@ -9,9 +9,6 @@ const Home = () => {
   return (
     <div>
       <Navbar />
-      <Link to="/signup">sign up</Link>
-      <br />
-      <Link to="/login">sign in</Link>
     </div>
   )
 }

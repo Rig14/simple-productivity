@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { auth } from './firebase';
+import Account from './pages/Account';
+import Graphs from './pages/Graphs';
 import Home from './pages/Home';
 import Login from './pages/Login';
+import Pomodoro from './pages/Pomodoro';
 import SignUp from './pages/Signup';
+import Todo from './pages/Todo';
 
 
 function App() {
@@ -30,6 +34,22 @@ function App() {
     <div>
       <Router>
         <Switch>
+          <Route path={"/account"}>
+            <Account />
+          </Route>
+
+          <Route path={"/graphs"}>
+            <Graphs />
+          </Route>
+
+          <Route path={"/todo"}>
+            <Todo />
+          </Route>
+
+          <Route path={"/pomodoro"}>
+            <Pomodoro />
+          </Route>
+
           <Route path={"/login"}>
             <Login />
           </Route>
