@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom';
-import { auth } from '../firebase';
+import db, { auth } from '../firebase';
 
 const Login = () => {
   const emailRef = useRef<HTMLInputElement>(null);
@@ -20,7 +20,6 @@ const Login = () => {
         passwordRef.current.value
       ).then( (e) =>{
         history.goBack();
-        console.log(e);
         setLoginButton(true);
       }).catch(err=>{
         const wrongPassword: String = "auth/wrong-password";

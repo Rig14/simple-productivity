@@ -58,7 +58,7 @@ const Navbar = () => {
   if (menuOpen) {
     navigationMenu = 
     <div className="navigation-menu">
-      <div className="nav-box">
+      <div className="nav-box nav-menu-shade">
         <div className="logo-icon-box">
           <Link to="/">
             <img src={Logo} alt="logo" />
