@@ -16,7 +16,7 @@ const Todo = () => {
 
         console.log(userTodoItems);
       })
-      .catch(error => console.log(error))
+      .catch(error => console.log(error.code))
   }
 
   return (

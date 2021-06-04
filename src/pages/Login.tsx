@@ -1,6 +1,9 @@
 import React, { useRef, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom';
 import db, { auth } from '../firebase';
+import Close from "../assets/icons/close-icon.svg"
+import Email from "../assets/icons/email.svg"
+import Password from "../assets/icons/padlock.svg"
 
 const Login = () => {
   const emailRef = useRef<HTMLInputElement>(null);
@@ -67,27 +70,48 @@ const Login = () => {
   }
 
   if (loginButton) {
-    button = <button onClick={login}>Login</button>
+    button = <button onClick={login} className="login-button">Login</button>
   } else {
-    button = <button onClick={login} disabled>Login</button>
+    button = <button onClick={login} disabled className="login-button-disabled">Login</button>
   }
 
   return (
     <div className="bg">
       <div className="form-box">
-        <button onClick={back}>X</button>
+        <div className="button-div">
+          <button onClick={back} className="go-back">
+            <img src={Close} alt="" />
+          </button>
+        </div>
+        
         <h1>Login</h1>
-        <input type="email" 
-        ref={emailRef}
-        placeholder="Email..."/>
-        <input type="password" 
-        ref={passwordRef}
-        placeholder="Password..."/>
-        {error}
-        {button}
-        <p>Not a user? 
-          <Link to="/signup">Create an account</Link>
-        </p>
+        <div className="input-container">
+          <div>
+            <img src={Email} alt="email" />
+            <input type="email" 
+            ref={emailRef}
+            placeholder="Email..."
+            className="email-box" />
+          </div>
+          <div>
+            <img src={Password} alt="password" />
+            <input type="password" 
+            ref={passwordRef}
+            placeholder="Password..."
+            className="password-box" />
+          </div>
+
+        </div>
+        <div className="error-div">
+          {error}
+        </div>
+
+          {button}
+
+        <div className="create-account-text">
+          <p>Not an user? <Link to="/signup">Create an account</Link>
+          </p>
+        </div>
       </div>
     </div>
   )

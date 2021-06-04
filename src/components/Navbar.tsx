@@ -9,7 +9,7 @@ import { auth } from '../firebase'
 const Navbar = () => {
   //menu control
   const [menuOpen, setMenuOpen] = useState(false);
-
+  let slideOutAnim;
   //checking if user is logged in. changes DOM accordingly 
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(auth.currentUser?.uid != null);
   let logoutOrSignin: JSX.Element = <></>;
@@ -32,6 +32,7 @@ const Navbar = () => {
     setMenuOpen(false)
   }
   const openMenu = () => {
+    slideOutAnim = {};
     setMenuOpen(true)
   }
 
@@ -60,7 +61,7 @@ const Navbar = () => {
   //navigation menu
   if (menuOpen) {
     navigationMenu = 
-    <div className="navigation-menu">
+    <div className="navigation-menu" style={slideOutAnim}>
       <div className="nav-box nav-menu-shade">
         <div className="logo-icon-box">
           <Link to="/">

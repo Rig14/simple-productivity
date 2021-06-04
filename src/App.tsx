@@ -29,13 +29,8 @@ function App() {
     return unsubscribe
   }, [])
 
-  const i = () => {
-    console.log(auth.currentUser?.uid);
-  }
-
   return (
     <div>
-      <button onClick={i}>get user uid</button>
       <Router>
         <Switch>
           <Route path={"/account"}>
