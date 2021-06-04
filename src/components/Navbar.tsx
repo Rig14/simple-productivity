@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Logo from '../assets/logo.png'
 import MenuIcon from '../assets/icons/menu-icon.svg'
 import CloseIcon from '../assets/icons/close-icon.svg'
@@ -22,6 +22,9 @@ const Navbar = () => {
     } else {
       setIsUserLoggedIn(false);
     }
+    //react is freaking out about this 👇
+    //dunno whats up but if i remove it then it breaks
+    //cant replace with isUserLoggedIn
   }, [auth.currentUser?.uid]);
 
 

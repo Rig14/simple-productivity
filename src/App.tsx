@@ -11,6 +11,7 @@ import Todo from './pages/Todo';
 
 
 function App() {
+  
   const [user, setUser] = useState<{uid: null | string | undefined, email: null | string | undefined}>({ uid: null, email: null })
 
   useEffect(() => {
@@ -28,10 +29,13 @@ function App() {
     return unsubscribe
   }, [])
 
-
+  const i = () => {
+    console.log(auth.currentUser?.uid);
+  }
 
   return (
     <div>
+      <button onClick={i}>get uid</button>
       <Router>
         <Switch>
           <Route path={"/account"}>

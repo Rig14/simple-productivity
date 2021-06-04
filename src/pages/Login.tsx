@@ -20,7 +20,6 @@ const Login = () => {
         passwordRef.current.value
       ).then( (e) =>{
         history.goBack();
-        console.log(e);
         setLoginButton(true);
       }).catch(err=>{
         const wrongPassword: String = "auth/wrong-password";
@@ -29,9 +28,6 @@ const Login = () => {
         const tooManyRequests: String = "auth/too-many-requests";
 
         const error = err.code;
-
-        console.log(error);
-        console.log(err);
 
         switch (error) {
           case wrongEmail:

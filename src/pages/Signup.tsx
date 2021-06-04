@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { useHistory } from 'react-router';
-import { auth } from '../firebase';
+import db, { auth } from '../firebase';
 
 const SignUp = () => {
   const emailRef = useRef<HTMLInputElement>(null);
@@ -20,6 +20,11 @@ const SignUp = () => {
       ).then(user =>{
         setSignupButton(true);
         history.push("/home")
+
+        //creation of the database
+        db.collection('users').doc(user?.user?.uid).set({
+          todoItems: []
+        })
       }).catch(err=>{
         setSignupButton(true)
 
@@ -29,7 +34,6 @@ const SignUp = () => {
         const emailInUse = "auth/email-already-in-use";
 
         const error = err.code
-        console.log(error);
 
         switch (error) {
           case invalidEmail:
