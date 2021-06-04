@@ -13,21 +13,31 @@ const SignUp = () => {
   const signUp = (e: any) => {
     if (emailRef?.current?.value != null && passwordRef?.current?.value != null) {
       e.preventDefault();
+
+      //disable the sign up button to avoid double sign up
       setSignupButton(false);
+
+      //creating the account with email and password
       auth.createUserWithEmailAndPassword(
         emailRef.current.value,
         passwordRef.current.value
       ).then(user =>{
+
+        //setting up the initial data
+        db.collection('users').doc(user?.user?.uid).set({
+          //all the initial data that will be written into 
+          //firestore database.
+          email: user.user?.email,
+          todoItems: ['code', 'stay cool', 'have fun']
+        })
+
+        //enables the button and redirects user to home page
         setSignupButton(true);
         history.push("/home")
-
-        //creation of the database
-        db.collection('users').doc(user?.user?.uid).set({
-          todoItems: []
-        })
       }).catch(err=>{
         setSignupButton(true)
-
+        
+        // possible error codes
         const invalidEmail = "auth/invalid-email";
         const weakPassword = "auth/weak-password";
         const emailExists = "auth/email-already-exists";
@@ -35,6 +45,7 @@ const SignUp = () => {
 
         const error = err.code
 
+        // creating an better error message for every error code
         switch (error) {
           case invalidEmail:
             setError(<p>The email you entered is not in the correct format. Please check.</p>)

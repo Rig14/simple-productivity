@@ -1,25 +1,28 @@
-import React, { useState } from 'react'
+import firebase from 'firebase'
+import React from 'react'
 import Navbar from '../components/Navbar'
 import db, { auth } from '../firebase'
 
-
 const Todo = () => {
+  const getUserData = () => {
+    db.collection('users').doc(auth.currentUser?.uid)
+      .get()
+      .then( snapshot => {
+        //holy shit this actually works
+        
+        let userData = snapshot.data();
 
-  const getData = () => {
+        let userTodoItems = userData?.todoItems;
 
-    /*
-    db.collection('users').onSnapshot(snap => {
-      console.log(snap.docs.map(doc=>doc.data().todoItems));
-    })
-    */
+        console.log(userTodoItems);
+      })
+      .catch(error => console.log(error))
   }
 
   return (
     <div>
       <Navbar />
-      <button onClick={() => getData()}>
-        get data
-      </button>
+      <button onClick={getUserData}>get data</button>
     </div>
   )
 }

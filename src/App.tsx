@@ -35,7 +35,7 @@ function App() {
 
   return (
     <div>
-      <button onClick={i}>get uid</button>
+      <button onClick={i}>get user uid</button>
       <Router>
         <Switch>
           <Route path={"/account"}>

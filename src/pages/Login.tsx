@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom';
-import { auth } from '../firebase';
+import db, { auth } from '../firebase';
 
 const Login = () => {
   const emailRef = useRef<HTMLInputElement>(null);
@@ -25,6 +25,7 @@ const Login = () => {
         const wrongPassword: String = "auth/wrong-password";
         const wrongEmail: String = "auth/user-not-found";
         const invalidEmail: String = "auth/invalid-email";
+        const userNotFound: String = 'auth/user-not-found'
         const tooManyRequests: String = "auth/too-many-requests";
 
         const error = err.code;
@@ -41,6 +42,9 @@ const Login = () => {
             break;
           case tooManyRequests:
             setError(<p>Access to this account has been temporarily disabled due to many failed login attempts.</p>)
+            break;
+          case userNotFound:
+            setError(<p>User does not exist. <Link to="/signup">Create an account</Link></p>)
         }
         const emailLength = emailRef.current?.value.length;
         const passwordLength = passwordRef.current?.value.length;
