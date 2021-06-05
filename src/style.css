@@ -1,35 +1,35 @@
 /*main css*/
-*{
+* {
   margin: 0;
   font-family: 'Lato', sans-serif;
 }
 
-.nav-box{
+.nav-box {
   width: 100vw;
   height: 75px;
   background-color: #f54748;
   display: flex;
 }
-.logo-icon-box{
+.logo-icon-box {
   width: 100px;
   height: 100%;
   margin-right: auto;
 }
-.logo-icon-box img{
+.logo-icon-box img {
   width: 100px;
   height: 100%;
 }
-.menu-button-box{
+.menu-button-box {
   width: 75px;
   height: 100%;
   margin-left: auto;
   position: relative;
   display: flex;
 }
-.nav-menu-shade{
-  box-shadow: 0px 10px 30px 20px rgba(245, 71, 72, .6);
+.nav-menu-shade {
+  box-shadow: 0px 10px 30px 20px rgba(245, 71, 72, 0.6);
 }
-.menu-button-box button{
+.menu-button-box button {
   width: 60px;
   height: 60px;
   padding: none;
@@ -39,36 +39,44 @@
   align-self: center;
   border-radius: 10px;
 }
-.menu-button-box button:hover{
+.menu-button-box button:hover {
   background-color: rgb(179, 24, 24);
 }
-.menu-button-box button:active{
+.menu-button-box button:active {
   border: rgb(202, 59, 59) 3px solid;
 }
-.menu-button-box button img{
+.menu-button-box button img {
   width: 30px;
   height: 30px;
   position: relative;
   bottom: -2px;
 }
 @keyframes nav-menu-slidein {
-  from{left: -100vw;}
-  to{left: 0vw;}
+  from {
+    left: -100vw;
+  }
+  to {
+    left: 0vw;
+  }
 }
 @keyframes nav-menu-slideout {
-  from{left: 0vw;}
-  to{left: -100vw;}
+  from {
+    left: 0vw;
+  }
+  to {
+    left: -100vw;
+  }
 }
-.navigation-menu{
+.navigation-menu {
   position: fixed;
   display: inline-block;
   width: 100vw;
   height: 100vh;
   background-color: #f5e6ca;
-  animation: nav-menu-slidein .2s;
+  animation: nav-menu-slidein 0.2s;
   z-index: 200;
 }
-.logged-out-links{
+.logged-out-links {
   display: flex;
   flex-direction: column;
   margin-top: 25px;
@@ -81,49 +89,48 @@
   text-decoration: none;
   color: white;
 }
-.logged-out-links .login-link{
+.logged-out-links .login-link {
   background-color: #343f56;
 }
 .logged-out-links .login-link:hover {
   background-color: #576481;
 }
-.logged-out-links .signup-link{
+.logged-out-links .signup-link {
   background-color: #f54748;
 }
 .logged-out-links .signup-link:hover {
   background-color: #e96262;
 }
 
-
-.content{
+.content {
   display: flex;
   flex-direction: column;
   margin-top: 50px;
 }
-.navbar-link{
+.navbar-link {
   margin: 5px 30px 15px 30px;
   padding-bottom: 15px;
   font-size: 15pt;
   text-decoration: none;
   border-bottom: 1px solid #343f56;
 }
-a.navbar-link{
-  color: #343f56; 
+a.navbar-link {
+  color: #343f56;
 }
-a.navbar-link:hover{
+a.navbar-link:hover {
   color: #5c6986;
 }
 
-.bg{
+.bg {
   width: 100%;
   height: 100%;
   min-height: 100vh;
-  background-image: linear-gradient(to bottom right, #f54748 , #fb9300);
+  background-image: linear-gradient(to bottom right, #f54748, #fb9300);
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.form-box{
+.form-box {
   background-color: #fb9300;
   min-height: fit-content;
   width: 400px;
@@ -131,18 +138,18 @@ a.navbar-link:hover{
   padding: 20px 30px 30px 30px;
   box-shadow: 0px 0px 20px black;
 }
-.form-box h1{
+.form-box h1 {
   color: #343f56;
   margin-top: 25px;
   position: relative;
   top: -20px;
   width: fit-content;
 }
-.form-box .button-div{
+.form-box .button-div {
   width: 100%;
   position: relative;
 }
-.go-back{
+.go-back {
   position: relative;
   left: 10px;
   width: 50px;
@@ -154,28 +161,28 @@ a.navbar-link:hover{
   padding: 10px;
   float: inline-end;
 }
-.go-back:hover{
-  background-color: #cf8012
+.go-back:hover {
+  background-color: #cf8012;
 }
-.go-back:active{
+.go-back:active {
   outline: 4px solid #f8a128;
 }
-.go-back img{
+.go-back img {
   width: 100%;
   height: 100%;
   cursor: pointer;
 }
-.input-container{
+.input-container {
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
 }
-.input-container input{
+.input-container input {
   margin: 20px;
   margin-right: 0;
   height: 40px;
   width: 100%;
-  background-color:#f5e6ca;
+  background-color: #f5e6ca;
   border: none;
   border-radius: 10px;
   color: #343f56;
@@ -183,27 +190,26 @@ a.navbar-link:hover{
   padding-left: 20px;
   font-size: 15pt;
 }
-.input-container div{
+.input-container div {
   display: flex;
-
 }
-.input-container img{
+.input-container img {
   height: 30px;
   width: 30px;
   margin-top: auto;
   margin-bottom: auto;
 }
-.error-div{
+.error-div {
   height: fit-content;
   max-width: 400px;
 }
-.error-div p{
+.error-div p {
   color: #ff0000;
   margin-bottom: 20px;
   font-weight: 600;
 }
 .form-button-disabled,
-.form-button{
+.form-button {
   width: 100%;
   height: 40px;
   background-color: #f54748;
@@ -214,82 +220,82 @@ a.navbar-link:hover{
   font-weight: 600;
   cursor: pointer;
 }
-.form-button:hover{
+.form-button:hover {
   background-color: #db3e3e;
 }
-.form-button-disabled{
-  background-color: rgb(245, 71, 72, .6);
+.form-button-disabled {
+  background-color: rgb(245, 71, 72, 0.6);
 }
-.create-account-text{
+.create-account-text {
   font-size: 14pt;
   font-weight: 600;
   margin-top: 25px;
   text-align: center;
   color: #343f56;
 }
-.create-account-text a{
+.create-account-text a {
   text-decoration: none;
   color: #ee2b2b;
 }
 
-.signup-information{
+.signup-information {
   color: #343f56;
   font-size: 13pt;
   font-weight: 600;
   margin-right: 10px;
   max-width: 400px;
-  opacity: .7;
+  opacity: 0.7;
 }
 
 @media screen and (max-width: 700px) {
-  .form-box{
+  .form-box {
     width: 300px;
   }
-  .form-box h1{
+  .form-box h1 {
     font-size: 18pt;
     margin-top: 30px;
   }
-  .signup-information{
+  .signup-information {
     font-size: 11pt;
   }
-  .input-container input{
+  .input-container input {
     font-size: 12pt;
   }
 }
 @media screen and (max-width: 400px) {
-  .form-box{
+  .form-box {
     width: 250px;
   }
-  .input-container input{
+  .input-container input {
     font-size: 11pt;
   }
-  .form-box h1{
+  .form-box h1 {
     font-size: 16pt;
     margin-top: 33px;
   }
-  .error-div p{
+  .error-div p {
     font-size: 11pt;
   }
-  .create-account-text{
+  .create-account-text {
     font-size: 11pt;
   }
 }
 @media screen and (max-width: 315px) {
-  .form-box{
+  .form-box {
     border-radius: 0px;
   }
-  .input-container img{
+  .input-container img {
     width: 25px;
     height: 25px;
     margin-right: 10px;
   }
-  .input-container input{
+  .input-container input {
     margin-left: 0px;
   }
-  .form-button{
+  .form-button {
     font-size: 12pt;
   }
-  .signup-information{
+  .signup-information {
     font-size: 10pt;
   }
 }

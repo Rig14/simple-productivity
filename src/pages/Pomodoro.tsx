@@ -1,11 +1,7 @@
-import React from 'react'
+import React from 'react';
 
-const Pomodoro = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+const Pomodoro = (): JSX.Element => {
+  return <div />;
+};
 
-export default Pomodoro
+export default Pomodoro;

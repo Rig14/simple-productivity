@@ -1,29 +1,32 @@
-import React from 'react'
-import Navbar from '../components/Navbar'
-import db, { auth } from '../firebase'
+import React from 'react';
+import Navbar from '../components/Navbar';
+import db, { auth } from '../firebase';
 
-const Todo = () => {
+const Todo = (): JSX.Element => {
   const getUserData = () => {
-    db.collection('users').doc(auth.currentUser?.uid)
+    db.collection('users')
+      .doc(auth.currentUser?.uid)
       .get()
-      .then( snapshot => {
-        //holy shit this actually works
-        
-        let userData = snapshot.data();
+      .then((snapshot) => {
+        // holy shit this actually works
 
-        let userTodoItems = userData?.todoItems;
+        const userData = snapshot.data();
+
+        const userTodoItems = userData?.todoItems;
 
         console.log(userTodoItems);
       })
-      .catch(error => console.log(error.code))
-  }
+      .catch((error) => console.log(error.code));
+  };
 
   return (
     <div>
       <Navbar />
-      <button onClick={getUserData}>get data</button>
+      <button onClick={getUserData} type="button">
+        get data
+      </button>
     </div>
-  )
-}
+  );
+};
 
-export default Todo
+export default Todo;

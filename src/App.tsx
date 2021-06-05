@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { auth } from './firebase';
 import Account from './pages/Account';
 import Graphs from './pages/Graphs';
@@ -9,57 +10,59 @@ import Pomodoro from './pages/Pomodoro';
 import SignUp from './pages/Signup';
 import Todo from './pages/Todo';
 
-
-function App() {
-
-  const [user, setUser] = useState<{uid: null | string | undefined, email: null | string | undefined}>({ uid: null, email: null })
+function App(): JSX.Element {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [user, setUser] = useState<{
+    uid: null | string | undefined;
+    email: null | string | undefined;
+  }>({ uid: null, email: null });
 
   useEffect(() => {
-    const unsubscribe =  auth.onAuthStateChanged(userAuth => {
+    const unsubscribe = auth.onAuthStateChanged((userAuth) => {
       const user = {
         uid: userAuth?.uid,
-        email: userAuth?.email
-      }
+        email: userAuth?.email,
+      };
       if (userAuth) {
-        setUser(user)
+        setUser(user);
       } else {
-        setUser({uid: null, email: null})
+        setUser({ uid: null, email: null });
       }
-    })
-    return unsubscribe
-  }, [])
+    });
+    return unsubscribe;
+  }, []);
 
   return (
     <div>
       <Router>
         <Switch>
-          <Route path={"/account"}>
+          <Route path="/account">
             <Account />
           </Route>
 
-          <Route path={"/graphs"}>
+          <Route path="/graphs">
             <Graphs />
           </Route>
 
-          <Route path={"/todo"}>
+          <Route path="/todo">
             <Todo />
           </Route>
 
-          <Route path={"/pomodoro"}>
+          <Route path="/pomodoro">
             <Pomodoro />
           </Route>
 
-          <Route path={"/login"}>
+          <Route path="/login">
             <Login />
           </Route>
 
-          <Route path={"/signup"}>
+          <Route path="/signup">
             <SignUp />
           </Route>
-          <Route path={"/"}>
+
+          <Route path="/">
             <Home />
           </Route>
-
         </Switch>
       </Router>
     </div>

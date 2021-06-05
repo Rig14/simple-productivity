@@ -1,11 +1,7 @@
-import React from 'react'
+import React from 'react';
 
-const Account = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+const Account = (): JSX.Element => {
+  return <div />;
+};
 
-export default Account
+export default Account;

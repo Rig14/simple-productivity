@@ -1,11 +1,7 @@
-import React from 'react'
+import React from 'react';
 
-const Graphs = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+const Graphs = (): JSX.Element => {
+  return <div />;
+};
 
-export default Graphs
+export default Graphs;

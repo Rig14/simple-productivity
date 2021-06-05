@@ -1,92 +1,108 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import Logo from '../assets/logo.png'
-import MenuIcon from '../assets/icons/menu-icon.svg'
-import CloseIcon from '../assets/icons/close-icon.svg'
-import { auth } from '../firebase'
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import Logo from '../assets/logo.png';
+import MenuIcon from '../assets/icons/menu-icon.svg';
+import CloseIcon from '../assets/icons/close-icon.svg';
+import { auth } from '../firebase';
 
-
-const Navbar = () => {
-  //menu control
+const Navbar = (): JSX.Element => {
+  // menu control
   const [menuOpen, setMenuOpen] = useState(false);
 
-  //checking if user is logged in. changes DOM accordingly 
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(auth.currentUser?.uid != null);
+  // checking if user is logged in. changes DOM accordingly
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(
+    auth.currentUser?.uid != null
+  );
   let logoutOrSignin: JSX.Element = <></>;
   let navigationMenu: JSX.Element = <></>;
 
-  //is user signed in or not [input] field has the state of user. every time that state changes it runs
+  // is user signed in or not [input] field has the state of user. every time that state changes it runs
   useEffect(() => {
-    if (auth.currentUser?.uid != null){
+    if (auth.currentUser?.uid != null) {
       setIsUserLoggedIn(true);
     } else {
       setIsUserLoggedIn(false);
     }
-    //react is freaking out about this 👇
-    //dunno whats up but if i remove it then it breaks
-    //cant replace with isUserLoggedIn
+    // react is freaking out about this 👇
+    // dunno whats up but if i remove it then it breaks
+    // cant replace with isUserLoggedIn
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auth.currentUser?.uid]);
 
   const closeMenu = () => {
-    setMenuOpen(false)
-  }
+    setMenuOpen(false);
+  };
   const openMenu = () => {
-    setMenuOpen(true)
-  }
+    setMenuOpen(true);
+  };
 
-  
   const logout = () => {
-    auth.signOut(); 
-  }
+    auth.signOut();
+  };
 
-  //changes the link to login if user is not logged in. otherwise it is a sign out button
+  // changes the link to login if user is not logged in. otherwise it is a sign out button
   if (isUserLoggedIn) {
-    logoutOrSignin = 
-    <>
-      <Link to="/account" className="navbar-link">Account</Link>
+    logoutOrSignin = (
+      <>
+        <Link to="/account" className="navbar-link">
+          Account
+        </Link>
 
-      <button onClick={logout} className="logoff-button">Sign out</button>
-    </>;
-    
+        <button onClick={logout} className="logoff-button" type="button">
+          Sign out
+        </button>
+      </>
+    );
   } else {
-    logoutOrSignin = 
-    <div className="logged-out-links">
-      <Link to={"/login"} className="login-link">Login</Link>
-      <Link to={"/signup"} className="signup-link">Create an account</Link>
-    </div>;
+    logoutOrSignin = (
+      <div className="logged-out-links">
+        <Link to="/login" className="login-link">
+          Login
+        </Link>
+        <Link to="/signup" className="signup-link">
+          Create an account
+        </Link>
+      </div>
+    );
   }
 
-  //navigation menu
+  // navigation menu
   if (menuOpen) {
-    navigationMenu = 
-    <div className="navigation-menu">
-      <div className="nav-box nav-menu-shade">
-        <div className="logo-icon-box">
-          <Link to="/">
-            <img src={Logo} alt="logo" />
+    navigationMenu = (
+      <div className="navigation-menu">
+        <div className="nav-box nav-menu-shade">
+          <div className="logo-icon-box">
+            <Link to="/">
+              <img src={Logo} alt="logo" />
+            </Link>
+          </div>
+          <div className="menu-button-box">
+            <button onClick={closeMenu} type="button">
+              <img src={CloseIcon} alt="close" />
+            </button>
+          </div>
+        </div>
+        <div className="content">
+          <Link to="/pomodoro" className="navbar-link">
+            Pomodoro
           </Link>
-        </div>
-        <div className="menu-button-box">
-          <button onClick={closeMenu}>
-            <img src={CloseIcon} alt="close" />
-          </button>
+          <Link to="/todo" className="navbar-link">
+            Todo List
+          </Link>
+          <Link to="/graphs" className="navbar-link">
+            Graphs
+          </Link>
+          {/*
+          changing button
+          */}
+          {logoutOrSignin}
         </div>
       </div>
-      <div className="content">
-        <Link to="/pomodoro" className="navbar-link">Pomodoro</Link>
-        <Link to="/todo" className="navbar-link">Todo List</Link>
-        <Link to="/graphs" className="navbar-link">Graphs</Link>
-        {/*
-        changing button
-        */}
-        {logoutOrSignin}
-      </div>
-    </div>;
-  } 
+    );
+  }
 
   return (
     <>
-
       {navigationMenu}
       {/*
       👆 when the navigation menu is opened renders that 
@@ -98,13 +114,13 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="menu-button-box">
-          <button onClick={openMenu}>
+          <button onClick={openMenu} type="button">
             <img src={MenuIcon} alt="menu" />
           </button>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
