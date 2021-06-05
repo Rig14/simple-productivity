@@ -1,4 +1,3 @@
-import firebase from 'firebase'
 import React from 'react'
 import Navbar from '../components/Navbar'
 import db, { auth } from '../firebase'

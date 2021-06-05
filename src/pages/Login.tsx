@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom';
-import db, { auth } from '../firebase';
+import { auth } from '../firebase';
 import Close from "../assets/icons/close-icon.svg"
 import Email from "../assets/icons/email.svg"
 import Password from "../assets/icons/padlock.svg"
@@ -41,13 +41,17 @@ const Login = () => {
             setError(<p>Your password does not match. Please try again.</p>);
             break;
           case invalidEmail:
-            setError(<p>Email is not valid</p>);
+            setError(<p>Email is not valid.</p>);
             break;
           case tooManyRequests:
             setError(<p>Access to this account has been temporarily disabled due to many failed login attempts.</p>)
             break;
           case userNotFound:
             setError(<p>User does not exist. <Link to="/signup">Create an account</Link></p>)
+            break;
+          default:
+            setError(<p>Something went wrong. Please try again.</p>)
+
         }
         const emailLength = emailRef.current?.value.length;
         const passwordLength = passwordRef.current?.value.length;
@@ -68,11 +72,17 @@ const Login = () => {
   const back = () => {
     history.goBack();
   }
+  
+  //if user is logged in and tries to view this
+  //component then push user back
+  if (auth.currentUser?.uid != null) {
+    back()
+  }
 
   if (loginButton) {
-    button = <button onClick={login} className="login-button">Login</button>
+    button = <button onClick={login} className="form-button">Log in</button>
   } else {
-    button = <button onClick={login} disabled className="login-button-disabled">Login</button>
+    button = <button onClick={login} disabled className="form-button-disabled">Log in</button>
   }
 
   return (
@@ -80,7 +90,7 @@ const Login = () => {
       <div className="form-box">
         <div className="button-div">
           <button onClick={back} className="go-back">
-            <img src={Close} alt="" />
+            <img src={Close} alt="close" />
           </button>
         </div>
         

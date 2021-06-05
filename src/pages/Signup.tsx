@@ -2,6 +2,10 @@ import React, { useRef, useState } from 'react'
 import { useHistory } from 'react-router';
 import db, { auth } from '../firebase';
 
+import Close from "../assets/icons/close-icon.svg"
+import Email from "../assets/icons/email.svg"
+import Password from "../assets/icons/padlock.svg"
+
 const SignUp = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -56,37 +60,60 @@ const SignUp = () => {
           case emailInUse: 
           case emailExists:
             setError(<p>The provided email is already in use.</p>)
+            break;
+          default:
+            setError(<p>Something went wrong. Please try again.</p>)
         }
       })
     }
   }
-
+  
   const back = () => {
     history.goBack();
   }
-
+  
+  //if user is logged in and tries to view this
+  //component then push user back
+  if (auth.currentUser?.uid != null) {
+    back()
+  }
+  
   let button = <button onClick={signUp}>Create an account</button>
-
+  
   if (signupButton) {
-    button = <button onClick={signUp}>Create an account</button>
+    button = <button onClick={signUp} className="form-button">Create an account</button>
   } else {
-    button = <button onClick={signUp} disabled>Create an account</button>
+    button = <button onClick={signUp} disabled className="form-button-disabled">Create an account</button>
   }
 
   return (
     <div className="bg">
       <div className="form-box">
-        <button onClick={back}>X</button>
+        <div className="button-div">
+          <button onClick={back} className="go-back">
+            <img src={Close} alt="close" />
+          </button>
+        </div>
         <h1>Create an account</h1>
-        <p>Gain access to additional features 
+        <p className="signup-information">Gain access to additional features 
           such as Graphs and Saves.</p>
-        <input type="email" 
-        ref={emailRef}
-        placeholder="Enter your email address..."/>
-        <input type="password" 
-        ref={passwordRef}
-        placeholder="Enter your password..."/>
-        {error}
+        <div className="input-container">
+          <div>
+            <img src={Email} alt="email" />
+            <input type="email" 
+            ref={emailRef}
+            placeholder="Enter your email address..."/>
+          </div>
+          <div>
+            <img src={Password} alt="password" />
+            <input type="password" 
+            ref={passwordRef}
+            placeholder="Enter your password..."/>
+          </div>
+        </div>
+        <div className="error-div">
+          {error}
+        </div>
         {button}
       </div>
     </div>
