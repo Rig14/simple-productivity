@@ -3,124 +3,61 @@
   margin: 0;
   font-family: 'Lato', sans-serif;
 }
-
-.nav-box {
-  width: 100vw;
-  height: 75px;
-  background-color: #f54748;
+.navbar {
+  width: 100%;
+  height: 50px;
+  background-color: #343f56;
   display: flex;
-}
-.logo-icon-box {
-  width: 100px;
-  height: 100%;
-  margin-right: auto;
-}
-.logo-icon-box img {
-  width: 100px;
-  height: 100%;
-}
-.menu-button-box {
-  width: 75px;
-  height: 100%;
-  margin-left: auto;
+  justify-content: center;
+  box-shadow: 0px 0px 20px 30px #343f56;
   position: relative;
+}
+.logo-container {
+  height: 100%;
+  margin-left: 20px;
+}
+.logo-container img {
+  width: 100%;
+  height: 100%;
+}
+.link-container {
   display: flex;
+  align-items: center;
+  border-bottom: 1px rgb(161, 161, 161) solid;
 }
-.nav-menu-shade {
-  box-shadow: 0px 10px 30px 20px rgba(245, 71, 72, 0.6);
-}
-.menu-button-box button {
-  width: 60px;
-  height: 60px;
-  padding: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  align-self: center;
-  border-radius: 10px;
-}
-.menu-button-box button:hover {
-  background-color: rgb(179, 24, 24);
-}
-.menu-button-box button:active {
-  border: rgb(202, 59, 59) 3px solid;
-}
-.menu-button-box button img {
-  width: 30px;
-  height: 30px;
-  position: relative;
-  bottom: -2px;
-}
-@keyframes nav-menu-slidein {
-  from {
-    left: -100vw;
-  }
-  to {
-    left: 0vw;
-  }
-}
-@keyframes nav-menu-slideout {
-  from {
-    left: 0vw;
-  }
-  to {
-    left: -100vw;
-  }
-}
-.navigation-menu {
-  position: fixed;
-  display: inline-block;
-  width: 100vw;
-  height: 100vh;
-  background-color: #f5e6ca;
-  animation: nav-menu-slidein 0.2s;
-  z-index: 200;
-}
-.logged-out-links {
-  display: flex;
-  flex-direction: column;
-  margin-top: 25px;
-}
-.logged-out-links a {
-  text-align: center;
-  padding: 10px;
-  border-radius: 10px;
-  margin: 5px 20px 5px 20px;
+.link-container a {
+  margin: 0 40px 0 40px;
+  font-size: 16pt;
+  font-weight: 600;
   text-decoration: none;
   color: white;
 }
-.logged-out-links .login-link {
-  background-color: #343f56;
+.link-container a img {
+  width: 96px;
+  height: 69px;
 }
-.logged-out-links .login-link:hover {
-  background-color: #576481;
+@media screen and (max-width: 800px) {
+  .link-container a {
+    margin: 0 20px 0 20px;
+  }
 }
-.logged-out-links .signup-link {
-  background-color: #f54748;
+@media screen and (max-width: 600px) {
+  .link-container a {
+    margin: 0 10px 0 10px;
+  }
 }
-.logged-out-links .signup-link:hover {
-  background-color: #e96262;
+@media screen and (max-width: 500px) {
+  .link-container a {
+    margin: 0 5px 0 5px;
+    font-size: 12pt;
+  }
 }
-
-.content {
-  display: flex;
-  flex-direction: column;
-  margin-top: 50px;
+@media screen and (max-width: 380px) {
+  .link-container a {
+    margin: 0 5px 0 5px;
+    font-size: 10pt;
+  }
 }
-.navbar-link {
-  margin: 5px 30px 15px 30px;
-  padding-bottom: 15px;
-  font-size: 15pt;
-  text-decoration: none;
-  border-bottom: 1px solid #343f56;
-}
-a.navbar-link {
-  color: #343f56;
-}
-a.navbar-link:hover {
-  color: #5c6986;
-}
-
 .bg {
   width: 100%;
   height: 100%;
@@ -237,16 +174,14 @@ a.navbar-link:hover {
   text-decoration: none;
   color: #ee2b2b;
 }
-
 .signup-information {
   color: #343f56;
-  font-size: 13pt;
+  font-size: 12pt;
   font-weight: 600;
   margin-right: 10px;
   max-width: 400px;
   opacity: 0.7;
 }
-
 @media screen and (max-width: 700px) {
   .form-box {
     width: 300px;
@@ -298,4 +233,10 @@ a.navbar-link:hover {
   .signup-information {
     font-size: 10pt;
   }
+}
+.page-content {
+  background-color: #f54748;
+  height: 100vh;
+  width: 100%;
+  padding-top: 50px;
 }
