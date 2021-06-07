@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
+import TodoItem from '../components/TodoItem';
 import db, { auth } from '../firebase';
 
 const Todo = (): JSX.Element => {
+  const [todos, setTodos] = useState<any>([]);
+
   const getUserData = () => {
     db.collection('users')
       .doc(auth.currentUser?.uid)
@@ -14,17 +17,26 @@ const Todo = (): JSX.Element => {
 
         const userTodoItems = userData?.todoItems;
 
-        console.log(userTodoItems);
+        setTodos(userTodoItems);
       })
       .catch((error) => console.log(error.code));
   };
 
+  // will load todoitems on page load
+  useEffect(() => {
+    getUserData();
+  }, []);
+
   return (
     <div>
       <Navbar />
-      <button onClick={getUserData} type="button">
-        get data
-      </button>
+      <div className="page-content">
+        <div className="todos">
+          {todos.map((item: string, index: number) => (
+            <TodoItem id={index} value={item} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

@@ -40,6 +40,12 @@ const SignUp = (): JSX.Element => {
               // firestore database.
               email: user.user?.email,
               todoItems: ['code', 'stay cool', 'have fun'],
+              timer: 0,
+              // count of all the todoitems done
+              // will add a date later to group them by it
+              todoItemsHistory: [],
+              // stores data about the timer, will also have date later
+              timerHistory: [],
             });
 
           // enables the button and redirects user to home page
