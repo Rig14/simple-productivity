@@ -20,6 +20,10 @@ const Todo: React.FC = (): JSX.Element => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
+  }, [todos]);
+
   const toggleTodo: ToggleTodo = (selectedTodo) => {
     // changes the selected todos status to be the other
     if (todos !== undefined) {
@@ -33,9 +37,6 @@ const Todo: React.FC = (): JSX.Element => {
         return todo;
       });
       setTodos(newTodos);
-
-      // adding the updated todos to local storage
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
     }
   };
 
@@ -72,9 +73,6 @@ const Todo: React.FC = (): JSX.Element => {
             return idx !== i;
           });
           setTodos(newTodos);
-
-          // adding the updated todos to local storage
-          localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
         }
       }
     }
