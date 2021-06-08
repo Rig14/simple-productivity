@@ -1,9 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AddTodo from '../components/AddTodo';
 import TodoList from '../components/TodoList';
 
+const LOCAL_STORAGE_KEY = 'simple-productivity-todos';
+
 const Todo: React.FC = (): JSX.Element => {
-  const [todos, setTodos] = useState<Todo[] | undefined>();
+  const [todos, setTodos] = useState<Todo[] | undefined>([]);
+
+  // getting local storage todos if they exist
+  useEffect(() => {
+    if (todos !== undefined) {
+      const userLocalStorage = localStorage.getItem(LOCAL_STORAGE_KEY);
+
+      if (userLocalStorage !== null) {
+        const loadedTodos: Todo[] = JSON.parse(userLocalStorage);
+        setTodos(loadedTodos);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const toggleTodo: ToggleTodo = (selectedTodo) => {
     // changes the selected todos status to be the other
@@ -18,6 +33,9 @@ const Todo: React.FC = (): JSX.Element => {
         return todo;
       });
       setTodos(newTodos);
+
+      // adding the updated todos to local storage
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
     }
   };
 
@@ -33,6 +51,9 @@ const Todo: React.FC = (): JSX.Element => {
       } else {
         setTodos([{ text: newTodo, status: false, id: Math.random() }]);
       }
+
+      // adding the updated todos to local storage
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
     }
   };
 
@@ -51,6 +72,9 @@ const Todo: React.FC = (): JSX.Element => {
             return idx !== i;
           });
           setTodos(newTodos);
+
+          // adding the updated todos to local storage
+          localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
         }
       }
     }
