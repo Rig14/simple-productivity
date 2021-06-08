@@ -6,11 +6,15 @@ import Email from '../assets/icons/email.svg';
 import Password from '../assets/icons/padlock.svg';
 
 const Login = (): JSX.Element => {
+  // both inputs refrence
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  // error message
   const [error, setError] = useState(<></>);
+  // used for conditionally disabeleing login button to avoid double signin
   const [loginButton, setLoginButton] = useState(true);
   let button: JSX.Element;
+  // used for pushing user back after login
   const history = useHistory();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -20,17 +24,21 @@ const Login = (): JSX.Element => {
       passwordRef?.current?.value != null
     ) {
       e.preventDefault();
+      // disabels the login button
       setLoginButton(false);
       auth
+        // signing in with the enterd data
         .signInWithEmailAndPassword(
           emailRef.current.value,
           passwordRef.current.value
         )
+        // if succesfull pushes user back a page and reenables the button
         .then(() => {
           history.goBack();
           setLoginButton(true);
         })
         .catch((err) => {
+          // all error codes
           const wrongPassword = 'auth/wrong-password';
           const wrongEmail = 'auth/user-not-found';
           const invalidEmail = 'auth/invalid-email';
@@ -39,6 +47,7 @@ const Login = (): JSX.Element => {
 
           const errorCode = err.code;
 
+          // setting error message for every error code
           switch (errorCode) {
             case wrongEmail:
               setError(
@@ -73,6 +82,7 @@ const Login = (): JSX.Element => {
           const emailLength = emailRef.current?.value.length;
           const passwordLength = passwordRef.current?.value.length;
 
+          // special cases to render more specific error message
           if (emailLength === 0 && passwordLength === 0) {
             setError(<p>Please enter your email and password</p>);
           } else if (emailLength === 0) {
@@ -81,6 +91,7 @@ const Login = (): JSX.Element => {
             setError(<p>Password required</p>);
           }
 
+          // reenables the button
           setLoginButton(true);
         });
     }
@@ -97,12 +108,14 @@ const Login = (): JSX.Element => {
   }
 
   if (loginButton) {
+    // enabled button
     button = (
       <button onClick={login} className="form-button" type="submit">
         Log in
       </button>
     );
   } else {
+    // disabled button
     button = (
       <button
         onClick={login}

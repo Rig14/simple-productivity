@@ -2,6 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 
+// api keys that give a refrence to our firebase account
 const config = {
   apiKey: 'AIzaSyAuPDsjJODwFE-O4iPBpUGaYP1q2BMmfHk',
   authDomain: 'simpleproductivity-bac4e.firebaseapp.com',
@@ -15,6 +16,7 @@ const config = {
 // initialize firebase
 firebase.initializeApp(config);
 
+// export auth and database
 const db = firebase.firestore();
 const auth = firebase.auth();
 

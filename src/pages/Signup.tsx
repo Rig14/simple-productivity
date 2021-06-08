@@ -14,6 +14,8 @@ const SignUp = (): JSX.Element => {
   const [signupButton, setSignupButton] = useState(true);
   const history = useHistory();
 
+  let button: JSX.Element;
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const signUp = (e: any) => {
     if (
@@ -38,14 +40,23 @@ const SignUp = (): JSX.Element => {
             .set({
               // all the initial data that will be written into
               // firestore database.
+
               email: user.user?.email,
-              todoItems: ['code', 'stay cool', 'have fun'],
+
+              // todoitems empty array
+              // {value: 'todo description', state: boolea0n}
+              todoItems: [
+                { task: 'yea', state: false },
+                { task: 'aaa', state: true },
+              ],
+              // pomodoro timer referance
               timer: 0,
-              // count of all the todoitems done
-              // will add a date later to group them by it
-              todoItemsHistory: [],
-              // stores data about the timer, will also have date later
-              timerHistory: [],
+              // count of all the todoitems done by date
+              // {date: date, count: no of todos done}
+              todoItemsHistory: [{}],
+              // stores historical data for timer
+              // {date: seconds of time spent}
+              timerHistory: [{}],
             });
 
           // enables the button and redirects user to home page
@@ -97,19 +108,15 @@ const SignUp = (): JSX.Element => {
     back();
   }
 
-  let button = (
-    <button onClick={signUp} type="submit">
-      Create an account
-    </button>
-  );
-
   if (signupButton) {
+    // enabled button
     button = (
       <button onClick={signUp} className="form-button" type="submit">
         Create an account
       </button>
     );
   } else {
+    // disabled button
     button = (
       <button
         onClick={signUp}

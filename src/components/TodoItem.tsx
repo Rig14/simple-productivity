@@ -1,14 +1,28 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable prettier/prettier */
 import React from 'react';
 
-const TodoItem = (props: { value: string; id: number }): JSX.Element => {
-  const { value } = props;
-  const { id } = props;
+interface TodoListItemProps {
+  todo: Todo;
+  toggleTodo: ToggleTodo;
+}
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+const TodoItem: React.FC<TodoListItemProps> = ({ todo, toggleTodo }) => {
   return (
-    <div>
-      <h1>{id}</h1>
-      <p>{value}</p>
-    </div>
+    <>
+      <li>
+        <label>
+          <input
+            type="checkbox"
+            checked={todo.status}
+            onChange={() => toggleTodo(todo)}
+          />
+          {todo.text}
+        </label>
+      </li>
+    </>
   );
 };
 

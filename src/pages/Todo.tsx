@@ -1,43 +1,47 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable import/no-cycle */
 import React, { useEffect, useState } from 'react';
-import Navbar from '../components/Navbar';
-import TodoItem from '../components/TodoItem';
-import db, { auth } from '../firebase';
+import AddTodo from '../components/AddTodo';
+import TodoList from '../components/TodoList';
 
-const Todo = (): JSX.Element => {
-  const [todos, setTodos] = useState<any>([]);
+const placeholder: Array<Todo> = [
+  { text: 'aaaaaa', status: false },
+  { text: '1213aa', status: true },
+];
 
-  const getUserData = () => {
-    db.collection('users')
-      .doc(auth.currentUser?.uid)
-      .get()
-      .then((snapshot) => {
-        // holy shit this actually works
+const Todo: React.FC = (): JSX.Element => {
+  const [todos, setTodos] = useState(placeholder);
 
-        const userData = snapshot.data();
-
-        const userTodoItems = userData?.todoItems;
-
-        setTodos(userTodoItems);
-      })
-      .catch((error) => console.log(error.code));
+  const toggleTodo: ToggleTodo = (selectedTodo) => {
+    const newTodos = todos.map((todo) => {
+      if (todo === selectedTodo) {
+        return {
+          ...todo,
+          status: !todo.status,
+        };
+      }
+      return todo;
+    });
+    setTodos(newTodos);
   };
 
-  // will load todoitems on page load
-  useEffect(() => {
-    getUserData();
-  }, []);
+  const addTodo: AddTodo = (newTodo) => {
+    if (newTodo.trim() !== '') {
+      setTodos([...todos, { text: newTodo, status: false}]);
+    }
+  };
+
+  const RemoveTodo: RemoveTodo = (todo) => {
+    todos.pop()
+  };
 
   return (
-    <div>
-      <Navbar />
-      <div className="page-content">
-        <div className="todos">
-          {todos.map((item: string, index: number) => (
-            <TodoItem id={index} value={item} />
-          ))}
-        </div>
-      </div>
-    </div>
+    <>
+      <h1>Todo List</h1>
+      <TodoList todos={todos} toggleTodo={toggleTodo} />
+      <AddTodo addTodo={addTodo} />
+    </>
   );
 };
 
