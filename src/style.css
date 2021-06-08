@@ -72,7 +72,7 @@
   min-height: fit-content;
   width: 400px;
   border-radius: 20px;
-  padding: 20px 30px 30px 30px;
+  padding: 20px 30px 20px 30px;
   box-shadow: 0px 0px 20px black;
 }
 .form-box h1 {
@@ -123,7 +123,7 @@
   margin-right: 0;
   height: 40px;
   width: 100%;
-  background-color: #f5e6ca;
+  background-color: white;
   border: none;
   border-radius: 10px;
   color: #343f56;
@@ -156,7 +156,7 @@
   background-color: #f54748;
   border: none;
   border-radius: 10px;
-  color: #f5e6ca;
+  color: white;
   font-size: 15pt;
   font-weight: 600;
   cursor: pointer;
@@ -167,16 +167,72 @@
 .form-button-disabled {
   background-color: rgb(245, 71, 72, 0.6);
 }
-.create-account-text {
+.login-bottom-text {
   font-size: 14pt;
   font-weight: 600;
   margin-top: 25px;
   text-align: center;
   color: white;
 }
-.create-account-text a {
+.login-bottom-text a {
   text-decoration: none;
   color: #ee2b2b;
+}
+.login-bottom-text button:hover,
+.login-bottom-text a:hover {
+  color: #e94242;
+}
+.forgot-password-button {
+  background-color: #343f56;
+  border: none;
+  cursor: pointer;
+  font-size: 12pt;
+  color: #ee2b2b;
+  font-weight: 600;
+}
+.forgot-password-input {
+  width: 60%;
+  height: 40px;
+  background-color: white;
+  border: none;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  color: #343f56;
+  padding-left: 20px;
+}
+.submit-email-div {
+  display: flex;
+  justify-content: center;
+}
+.submit-email {
+  width: 15%;
+  border-radius: 0px;
+  height: 42px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: #f54748;
+}
+.submit-email:hover {
+  background-color: #eb3535;
+}
+.submit-email img {
+  position: relative;
+  left: -7px;
+  top: 2px;
+  width: 20px;
+  height: 20px;
+}
+.forgot-password h3 {
+  font-size: 14pt;
+}
+.forgot-password p {
+  margin-top: 15px;
+  font-size: 12px;
+  margin-bottom: 15px;
+}
+.forgot-password-message p {
+  font-size: 12pt;
+  color: #ff0000;
 }
 .signup-information {
   color: white;
@@ -215,8 +271,11 @@
   .error-div p {
     font-size: 11pt;
   }
-  .create-account-text {
+  .login-bottom-text {
     font-size: 11pt;
+  }
+  .submit-email img {
+    left: -10px;
   }
 }
 @media screen and (max-width: 315px) {
@@ -239,7 +298,7 @@
   }
 }
 .page-content {
-  background-color: #f54748;
+  background-color: #f5e6ca;
   height: 100vh;
   width: 100%;
   padding-top: 50px;

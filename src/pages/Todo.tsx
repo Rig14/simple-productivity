@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import AddTodo from '../components/AddTodo';
+import Navbar from '../components/Navbar';
 import TodoList from '../components/TodoList';
 
 const LOCAL_STORAGE_KEY = 'simple-productivity-todos';
@@ -80,9 +81,16 @@ const Todo: React.FC = (): JSX.Element => {
 
   return (
     <>
-      <h1>Todo List</h1>
-      <TodoList todos={todos} toggleTodo={toggleTodo} removeTodo={removeTodo} />
-      <AddTodo addTodo={addTodo} />
+      <Navbar />
+      <div className="page-content">
+        <h1>Todo List</h1>
+        <TodoList
+          todos={todos}
+          toggleTodo={toggleTodo}
+          removeTodo={removeTodo}
+        />
+        <AddTodo addTodo={addTodo} />
+      </div>
     </>
   );
 };

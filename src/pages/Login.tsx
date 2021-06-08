@@ -4,11 +4,17 @@ import { auth } from '../firebase';
 import Close from '../assets/icons/close-icon.svg';
 import Email from '../assets/icons/email.svg';
 import Password from '../assets/icons/padlock.svg';
+import RightArrow from '../assets/icons/right-arrow.svg';
 
 const Login = (): JSX.Element => {
   // both inputs refrence
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  // bottom forgot password
+  const [forgotPasswordForm, setForgotPasswordForm] = useState<boolean>(false);
+  const forgotPasswordRef = useRef<HTMLInputElement>(null);
+  const [forgotPasswordMessage, setForgotPasswordMessage] =
+    useState<JSX.Element>(<></>);
   // error message
   const [error, setError] = useState(<></>);
   // used for conditionally disabeleing login button to avoid double signin
@@ -128,6 +134,78 @@ const Login = (): JSX.Element => {
     );
   }
 
+  let forgotPasswordInput: JSX.Element = (
+    <>
+      <button
+        className="forgot-password-button"
+        type="button"
+        onClick={() => setForgotPasswordForm(true)}
+      >
+        Forgot your password
+      </button>
+    </>
+  );
+
+  const submitForgottenPasswordEmail = () => {
+    // sending the user an email to reset password
+    const email = forgotPasswordRef.current?.value;
+
+    if (email !== undefined) {
+      auth
+        .sendPasswordResetEmail(email)
+        .then(() => setForgotPasswordMessage(<p>Success!</p>))
+        .catch((err) => {
+          const userNotFound = 'auth/user-not-found';
+          const badFormat = 'auth/invalid-email';
+
+          const { code } = err;
+
+          switch (code) {
+            case userNotFound:
+              setForgotPasswordMessage(<p>User was not found</p>);
+              break;
+            case badFormat:
+              setForgotPasswordMessage(<p>Email is not valid</p>);
+              break;
+            default:
+              setForgotPasswordMessage(
+                <p>Something went wrong. Please try again</p>
+              );
+          }
+        });
+    } else {
+      setForgotPasswordMessage(<p>Please enter your Email</p>);
+    }
+  };
+
+  if (forgotPasswordForm) {
+    forgotPasswordInput = (
+      <div className="forgot-password">
+        <h3>Reset your password </h3>
+        <p>
+          Tell us the email address associated with your account, and we’ll send
+          you an email with a link to reset your password.
+        </p>
+        <div className="submit-email-div">
+          <input
+            className="forgot-password-input"
+            type="text"
+            ref={forgotPasswordRef}
+            placeholder="enter your email..."
+          />
+          <button
+            type="submit"
+            className="forgot-password-input submit-email"
+            onClick={submitForgottenPasswordEmail}
+          >
+            <img src={RightArrow} alt="submitEmail" />
+          </button>
+        </div>
+        <div className="forgot-password-message">{forgotPasswordMessage}</div>
+      </div>
+    );
+  }
+
   return (
     <div className="bg">
       <div className="form-box">
@@ -162,11 +240,12 @@ const Login = (): JSX.Element => {
 
         {button}
 
-        <div className="create-account-text">
+        <div className="login-bottom-text">
           <p>
             Not an user? <Link to="/signup">Create an account</Link>
           </p>
         </div>
+        <div className="login-bottom-text">{forgotPasswordInput}</div>
       </div>
     </div>
   );
