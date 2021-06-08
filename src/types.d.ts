@@ -1,10 +1,11 @@
 type Todo = {
   text: string;
   status: boolean;
+  id: number;
 };
 
 type ToggleTodo = (selectedTodo: Todo) => void;
 
 type AddTodo = (newTodo: string) => void;
 
-type RemoveTodo = (todo: Todo) => void;
+type RemoveTodo = (removedTodo: Todo) => void;

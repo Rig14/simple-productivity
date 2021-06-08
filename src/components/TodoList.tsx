@@ -4,16 +4,25 @@ import TodoItem from './TodoItem';
 interface TodoListProps {
   todos: Array<Todo>;
   toggleTodo: ToggleTodo;
+  removeTodo: RemoveTodo;
 }
 
 const TodoList: React.FC<TodoListProps> = ({
   todos,
   toggleTodo,
+  removeTodo,
 }): JSX.Element => {
   return (
     <ul>
       {todos.map((todo) => {
-        return <TodoItem key={todo.text} todo={todo} toggleTodo={toggleTodo} />;
+        return (
+          <TodoItem
+            key={todo.id}
+            todo={todo}
+            toggleTodo={toggleTodo}
+            removeTodo={removeTodo}
+          />
+        );
       })}
     </ul>
   );

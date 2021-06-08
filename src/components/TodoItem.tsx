@@ -1,15 +1,17 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable prettier/prettier */
 import React from 'react';
 
 interface TodoListItemProps {
   todo: Todo;
   toggleTodo: ToggleTodo;
+  removeTodo: RemoveTodo;
 }
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-const TodoItem: React.FC<TodoListItemProps> = ({ todo, toggleTodo }) => {
+const TodoItem: React.FC<TodoListItemProps> = ({
+  todo,
+  toggleTodo,
+  removeTodo,
+}) => {
   return (
     <>
       <li>
@@ -20,6 +22,10 @@ const TodoItem: React.FC<TodoListItemProps> = ({ todo, toggleTodo }) => {
             onChange={() => toggleTodo(todo)}
           />
           {todo.text}
+          <button type="button" onClick={() => removeTodo(todo)}>
+            X
+          </button>
+          <p>id {todo.id}</p>
         </label>
       </li>
     </>
