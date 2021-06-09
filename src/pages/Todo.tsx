@@ -7,11 +7,14 @@ import db, { auth } from '../firebase';
 const LOCAL_STORAGE_KEY = 'simple-productivity-todos';
 
 const Todo: React.FC = (): JSX.Element => {
+  // got the todolist adding items and marking done or undone from youtube
+  // had to write the deletion and both storage parts myself
+
   const [todos, setTodos] = useState<Todo[] | undefined>(undefined);
   const userLeftPageRef = useRef(false);
 
   useEffect(() => {
-    // om mount will get stored user todos if they exist
+    // on mount will get stored user todos if they exist
     // todos is alaways undefined if page is reloded
     if (todos === undefined) {
       // first we check if the user is not logged in,

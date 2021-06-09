@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { auth } from '../firebase';
 import Close from '../assets/icons/close-icon.svg';
@@ -38,10 +38,9 @@ const Login = (): JSX.Element => {
           emailRef.current.value,
           passwordRef.current.value
         )
-        // if succesfull pushes user back a page and reenables the button
+        // if succesfull pushes user back
         .then(() => {
-          history.goBack();
-          setLoginButton(true);
+          history.push('/');
         })
         .catch((err) => {
           // all error codes
@@ -97,7 +96,7 @@ const Login = (): JSX.Element => {
             setError(<p>Password required</p>);
           }
 
-          // reenables the button
+          // re enables the button
           setLoginButton(true);
         });
     }
@@ -109,9 +108,12 @@ const Login = (): JSX.Element => {
 
   // if user is logged in and tries to view this
   // component then push user back
-  if (auth.currentUser?.uid != null) {
-    back();
-  }
+  useEffect(() => {
+    if (auth.currentUser?.uid != null) {
+      back();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (loginButton) {
     // enabled button
