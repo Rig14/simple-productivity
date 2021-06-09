@@ -104,7 +104,7 @@ const Login = (): JSX.Element => {
   };
 
   const back = () => {
-    history.goBack();
+    history.push('/');
   };
 
   // if user is logged in and tries to view this

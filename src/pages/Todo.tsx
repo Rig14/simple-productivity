@@ -18,12 +18,11 @@ const Todo: React.FC = (): JSX.Element => {
       // then we set todos to the stored todos int theyr local storage
       if (auth.currentUser === null) {
         const userLocalStorage = localStorage.getItem(LOCAL_STORAGE_KEY);
-
-        // if the local storage is empty then will give back empty array
         if (userLocalStorage !== null) {
           const loadedTodos: Todo[] = JSON.parse(userLocalStorage);
           setTodos(loadedTodos);
         } else {
+          // if the local storage is empty then will set an empty array
           setTodos([]);
         }
         // if the user is logged in then will get user todos
@@ -40,7 +39,7 @@ const Todo: React.FC = (): JSX.Element => {
         });
       }
     }
-    // unmount: setting up the uploading to database
+    // preunmount: setting up the uploading to database
     // cant access todos from here after unmount
     // took me about a hour to figure this out
     return () => {
@@ -49,9 +48,10 @@ const Todo: React.FC = (): JSX.Element => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // unmount
   useEffect(() => {
     return () => {
-      if (userLeftPageRef.current === true) {
+      if (userLeftPageRef.current === true && todos !== undefined) {
         // if user is signed in writes data to firestore
         if (auth.currentUser !== null) {
           db.collection('users')
