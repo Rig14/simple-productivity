@@ -18,10 +18,10 @@ const TodoItem: React.FC<TodoListItemProps> = ({
         <label>
           <input
             type="checkbox"
-            checked={todo.status}
+            checked={todo.state}
             onChange={() => toggleTodo(todo)}
           />
-          {todo.text}
+          {todo.task}
           <button type="button" onClick={() => removeTodo(todo)}>
             X
           </button>

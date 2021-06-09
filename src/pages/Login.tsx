@@ -148,13 +148,17 @@ const Login = (): JSX.Element => {
 
   const submitForgottenPasswordEmail = () => {
     // sending the user an email to reset password
+
     const email = forgotPasswordRef.current?.value;
 
     if (email !== undefined) {
       auth
+        // sending email to the specified location
         .sendPasswordResetEmail(email)
+        // if everything goes according to plan
         .then(() => setForgotPasswordMessage(<p>Success!</p>))
         .catch((err) => {
+          // setting error messages
           const userNotFound = 'auth/user-not-found';
           const badFormat = 'auth/invalid-email';
 
@@ -174,6 +178,7 @@ const Login = (): JSX.Element => {
           }
         });
     } else {
+      // if nothing is entered
       setForgotPasswordMessage(<p>Please enter your Email</p>);
     }
   };

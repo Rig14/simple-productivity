@@ -41,13 +41,11 @@ const SignUp = (): JSX.Element => {
               // all the initial data that will be written into
               // firestore database.
 
-              email: user.user?.email,
-
               // todoitems empty array
-              // {value: 'todo description', state: boolea0n}
+              // {task: 'todo description', state: boolean, id: random float}
               todoItems: [
-                { task: 'yea', state: false },
-                { task: 'aaa', state: true },
+                { task: 'yea', state: false, id: 0.1 },
+                { task: 'aaa', state: true, id: 0.2 },
               ],
               // pomodoro timer referance
               timer: 0,

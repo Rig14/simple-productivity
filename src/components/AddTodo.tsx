@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 
 interface AddTodoFormProps {

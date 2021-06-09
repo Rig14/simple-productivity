@@ -1,6 +1,6 @@
 type Todo = {
-  text: string;
-  status: boolean;
+  task: string;
+  state: boolean;
   id: number;
 };
 
