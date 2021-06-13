@@ -22,7 +22,9 @@ const Pomodoro = (): JSX.Element => {
   // after every pomodoro take a small break
   // after 4 pomodoros take a big break and restart the loop
   const [pomodoroCounter, setPomodoroCounter] = useState(0);
-  const userLeftPageRef = useRef(false);
+  const userLeftPageRef = useRef<boolean>(false);
+
+  const [message, setMessage] = useState('');
 
   const getFormatedTime = (): FormatedTime => {
     // returns back formated time
@@ -41,6 +43,26 @@ const Pomodoro = (): JSX.Element => {
       secondStr = `0${secondStr}`;
     }
     return { minutes: minuteStr, seconds: secondStr };
+  };
+
+  const getMessage = (counter: number) => {
+    switch (counter) {
+      case 0:
+      case 2:
+      case 4:
+      case 6:
+        setMessage('Task');
+        break;
+      case 1:
+      case 3:
+      case 5:
+        setMessage('Take a short break');
+        break;
+      case 7:
+        setMessage('Take a big break');
+        break;
+      default:
+    }
   };
 
   const writeStorage = () => {
@@ -79,6 +101,9 @@ const Pomodoro = (): JSX.Element => {
     }
 
     setFormatedTime(getFormatedTime());
+
+    getMessage(pomodoroCounter);
+
     return () => {
       // pre unmount
       userLeftPageRef.current = true;
@@ -114,17 +139,23 @@ const Pomodoro = (): JSX.Element => {
           }
           // also turns the timer off for user to start next task/break
           setTimerHasStarted(false);
+          getMessage(counter);
         }
         // the interval in ms
-      }, 1);
+      }, 1000);
       return () => {
         clearInterval(interval);
-        writeStorage();
       };
     }
-    return () => undefined;
+    return () => {
+      if (userLeftPageRef.current) {
+        writeStorage();
+      }
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [time, timerHasStarted]);
+
+  console.log(pomodoroCounter);
 
   return (
     <>
@@ -138,9 +169,11 @@ const Pomodoro = (): JSX.Element => {
             <button
               onClick={() => setTimerHasStarted(!timerHasStarted)}
               type="button"
+              className="timer-button"
             >
-              {timerHasStarted ? 'stop timer' : 'start timer'}
+              {timerHasStarted ? 'STOP' : 'START'}
             </button>
+            <div className="message">{message}</div>
           </div>
         </div>
       </div>
