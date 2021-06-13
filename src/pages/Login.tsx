@@ -217,12 +217,11 @@ const Login = (): JSX.Element => {
     <div className="bg">
       <div className="form-box">
         <div className="button-div">
+          <h1>Login</h1>
           <button onClick={back} className="go-back" type="button">
             <img src={Close} alt="close" />
           </button>
         </div>
-
-        <h1>Login</h1>
         <div className="input-container">
           <div>
             <img src={Email} alt="email" />

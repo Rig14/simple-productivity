@@ -131,11 +131,11 @@ const SignUp = (): JSX.Element => {
     <div className="bg">
       <div className="form-box">
         <div className="button-div">
+          <h1>Create an account</h1>
           <button onClick={back} className="go-back" type="button">
             <img src={Close} alt="close" />
           </button>
         </div>
-        <h1>Create an account</h1>
         <p className="signup-information">
           Gain access to additional features such as Graphs and Saves.
         </p>

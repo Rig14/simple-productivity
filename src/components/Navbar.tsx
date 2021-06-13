@@ -1,24 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { auth } from '../firebase';
 import Logo from '../assets/logo.png';
 
 const Navbar = (): JSX.Element => {
-  const [userAuth, setUserAuth] = useState<boolean>();
-
-  useEffect(() => {
-    if (auth.currentUser?.uid != null) {
-      setUserAuth(true);
-    } else {
-      setUserAuth(false);
-    }
-    // there is no way that i can remove it
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [auth.currentUser?.uid]);
-
   const showLinks = (): JSX.Element => {
     // links when user is signed in
-    if (userAuth === true) {
+    if (auth.currentUser !== null) {
       return (
         <>
           <Link to="/todo">Todo</Link>
@@ -45,9 +33,6 @@ const Navbar = (): JSX.Element => {
       </>
     );
   };
-
-  // eslint-disable-next-line no-console
-  console.log(showLinks);
 
   return (
     <>
