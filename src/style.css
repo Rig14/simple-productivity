@@ -308,3 +308,24 @@
   width: 100%;
   padding-top: 50px;
 }
+.page-content-wrapper{
+  margin-top: 75px;
+  max-width: 850px;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+}
+.timer-box{
+  background-color: #f54748;
+  width: 600px;
+  height: 400px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.timer{
+  font-size: 100pt;
+  color: white;
+}
