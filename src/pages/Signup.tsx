@@ -47,8 +47,9 @@ const SignUp = (): JSX.Element => {
                 { task: 'yea', state: false, id: 0.1 },
                 { task: 'aaa', state: true, id: 0.2 },
               ],
-              // pomodoro timer referance
-              timer: 0,
+              // pomodoro timer
+              // takes time in seconds and pomodoro counter
+              timer: { time: 1500, counter: 0 },
               // count of all the todoitems done by date
               // {date: date, count: no of todos done}
               todoItemsHistory: [{}],
