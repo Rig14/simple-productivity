@@ -46,6 +46,7 @@ const Pomodoro = (): JSX.Element => {
   };
 
   const getMessage = (counter: number) => {
+    // setting the message for user
     switch (counter) {
       case 0:
       case 2:
@@ -58,7 +59,7 @@ const Pomodoro = (): JSX.Element => {
       case 5:
         setMessage('Take a short break');
         break;
-      case 7:
+      case -1:
         setMessage('Take a big break');
         break;
       default:
@@ -82,6 +83,7 @@ const Pomodoro = (): JSX.Element => {
 
   useEffect(() => {
     // getting data from database if user is logged in
+
     if (auth.currentUser !== null) {
       const docRef = db.collection('users').doc(auth.currentUser.uid);
       docRef.get().then((doc) => {
@@ -89,6 +91,8 @@ const Pomodoro = (): JSX.Element => {
 
         setTime(userData.time);
         setPomodoroCounter(userData.counter);
+        const { counter } = userData;
+        getMessage(counter);
       });
     } else {
       // getting data from local
@@ -97,12 +101,12 @@ const Pomodoro = (): JSX.Element => {
         const data = JSON.parse(userLocalStorage);
         setTime(data.time);
         setPomodoroCounter(data.counter);
+        const { counter } = data;
+        getMessage(counter);
       }
     }
 
     setFormatedTime(getFormatedTime());
-
-    getMessage(pomodoroCounter);
 
     return () => {
       // pre unmount
@@ -123,7 +127,7 @@ const Pomodoro = (): JSX.Element => {
         if (time === 0) {
           // increasing the pomodoro counter
           setPomodoroCounter(pomodoroCounter + 1);
-          const counter = pomodoroCounter + 1;
+          let counter = pomodoroCounter + 1;
 
           if ([1, 3, 5].includes(counter)) {
             // short break
@@ -136,13 +140,14 @@ const Pomodoro = (): JSX.Element => {
             setTime(900);
             // after a big break the loop starts over
             setPomodoroCounter(-1);
+            counter = -1;
           }
           // also turns the timer off for user to start next task/break
           setTimerHasStarted(false);
           getMessage(counter);
         }
         // the interval in ms
-      }, 1000);
+      }, 0.01);
       return () => {
         clearInterval(interval);
       };
@@ -153,9 +158,7 @@ const Pomodoro = (): JSX.Element => {
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [time, timerHasStarted]);
-
-  console.log(pomodoroCounter);
+  }, [time, timerHasStarted, pomodoroCounter]);
 
   return (
     <>
@@ -164,7 +167,9 @@ const Pomodoro = (): JSX.Element => {
         <div className="page-content-wrapper">
           <div className="timer-box">
             <div className="timer">
-              {formatedTime.minutes}:{formatedTime.seconds}
+              <p>
+                {formatedTime.minutes}:{formatedTime.seconds}
+              </p>
             </div>
             <button
               onClick={() => setTimerHasStarted(!timerHasStarted)}
@@ -173,7 +178,9 @@ const Pomodoro = (): JSX.Element => {
             >
               {timerHasStarted ? 'STOP' : 'START'}
             </button>
-            <div className="message">{message}</div>
+            <div className="message">
+              <p>{message}</p>
+            </div>
           </div>
         </div>
       </div>
