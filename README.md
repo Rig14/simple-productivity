@@ -5,13 +5,14 @@ Productivity app with todo list and pomodoro timer. Has user saves and statistic
 This is my first project with react. Also my first big web project.
 
 Made this with a friend who created the android app version.
-[His github repo](placeholder)
+[His github repo](https://github.com/Relxrelt/simple-productivity)
 
 ## Technology used:
 
-* [Firebase](https://firebase.google.com/)
-* [React](https://reactjs.org/)
-* [Node and npm](https://nodejs.org/en/)
-* [Typescript](https://www.typescriptlang.org/)
-* [Git](https://git-scm.com/)
+* Firebase
+* React
+* Node and npm
+* Typescript
+* Git
+* Css
 
