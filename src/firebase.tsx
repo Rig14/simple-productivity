@@ -3,6 +3,8 @@ import 'firebase/firestore';
 import 'firebase/auth';
 
 // api keys that give a refrence to our firebase account
+// firestore rules wont allow not signed in users to read or write data
+// also it disables users to see or write to other users data
 const config = {
   apiKey: 'AIzaSyAuPDsjJODwFE-O4iPBpUGaYP1q2BMmfHk',
   authDomain: 'simpleproductivity-bac4e.firebaseapp.com',

@@ -11,8 +11,8 @@ const Account = (): JSX.Element => {
     history.goBack();
   };
 
-  // if user is logged in and tries to view this
-  // component then push user back
+  // if user isn't logged in and tries
+  // to view this component then push user back
   if (auth.currentUser?.uid === undefined) {
     history.goBack();
   }

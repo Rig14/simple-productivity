@@ -10,19 +10,20 @@ const Login = (): JSX.Element => {
   // both inputs refrence
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
-  // bottom forgot password
+  // bottom forgot password states
   const [forgotPasswordForm, setForgotPasswordForm] = useState<boolean>(false);
   const forgotPasswordRef = useRef<HTMLInputElement>(null);
   const [forgotPasswordMessage, setForgotPasswordMessage] =
     useState<JSX.Element>(<></>);
   // error message
   const [error, setError] = useState(<></>);
-  // used for conditionally disabeleing login button to avoid double signin
+  // used for conditionally disabling login button to avoid double signin
   const [loginButton, setLoginButton] = useState(true);
   let button: JSX.Element;
   // used for pushing user back after login
   const history = useHistory();
 
+  // dont know the type of that "e"
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const login = (e: any) => {
     if (
@@ -30,10 +31,10 @@ const Login = (): JSX.Element => {
       passwordRef?.current?.value != null
     ) {
       e.preventDefault();
-      // disabels the login button
+      // disables the login button
       setLoginButton(false);
       auth
-        // signing in with the enterd data
+        // signing in with the entered data
         .signInWithEmailAndPassword(
           emailRef.current.value,
           passwordRef.current.value
@@ -47,7 +48,6 @@ const Login = (): JSX.Element => {
           const wrongPassword = 'auth/wrong-password';
           const wrongEmail = 'auth/user-not-found';
           const invalidEmail = 'auth/invalid-email';
-          const userNotFound = 'auth/user-not-found';
           const tooManyRequests = 'auth/too-many-requests';
 
           const errorCode = err.code;
@@ -70,14 +70,6 @@ const Login = (): JSX.Element => {
                 <p>
                   Access to this account has been temporarily disabled due to
                   many failed login attempts.
-                </p>
-              );
-              break;
-            case userNotFound:
-              setError(
-                <p>
-                  User does not exist.{' '}
-                  <Link to="/signup">Create an account</Link>
                 </p>
               );
               break;
@@ -143,7 +135,7 @@ const Login = (): JSX.Element => {
         type="button"
         onClick={() => setForgotPasswordForm(true)}
       >
-        Forgot your password
+        Forgot your password?
       </button>
     </>
   );
@@ -179,9 +171,6 @@ const Login = (): JSX.Element => {
               );
           }
         });
-    } else {
-      // if nothing is entered
-      setForgotPasswordMessage(<p>Please enter your Email</p>);
     }
   };
 

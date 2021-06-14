@@ -15,10 +15,10 @@ const Todo: React.FC = (): JSX.Element => {
 
   useEffect(() => {
     // on mount will get stored user todos if they exist
-    // todos is alaways undefined if page is reloded
+    // todos is alaways undefined if page is loaded
     if (todos === undefined) {
       // first we check if the user is not logged in,
-      // then we set todos to the stored todos int theyr local storage
+      // then we set todos to the stored todos in local storage
       if (auth.currentUser === null) {
         const userLocalStorage = localStorage.getItem(LOCAL_STORAGE_KEY);
         if (userLocalStorage !== null) {
@@ -37,6 +37,7 @@ const Todo: React.FC = (): JSX.Element => {
           const userData = doc.data();
 
           // setting the todos to be the data from firestore
+          // if no todos exist in database then sets it to empty array automatically
           const userTodos = userData?.todoItems;
           setTodos(userTodos);
         });
@@ -86,7 +87,7 @@ const Todo: React.FC = (): JSX.Element => {
 
   const addTodo: AddTodo = (newTodo) => {
     if (newTodo.trim() !== '') {
-      // sets a new todo to the todos item list
+      // sets a new todo to the todos object list
       // also sets its id to "unique" number
       if (todos !== undefined) {
         setTodos([
@@ -109,7 +110,7 @@ const Todo: React.FC = (): JSX.Element => {
         // if the todo object has same id as the one that is to be removed
         if (todo.id === removedTodo.id) {
           // filters it out by excluding it in the new array
-          // this is nessecary to update the screen
+          // this is necessary to update the screen
           const newTodos = todos.filter((val, idx) => {
             return idx !== i;
           });

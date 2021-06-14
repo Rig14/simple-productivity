@@ -83,7 +83,6 @@ const Pomodoro = (): JSX.Element => {
 
   useEffect(() => {
     // getting data from database if user is logged in
-
     if (auth.currentUser !== null) {
       const docRef = db.collection('users').doc(auth.currentUser.uid);
       docRef.get().then((doc) => {
@@ -189,3 +188,5 @@ const Pomodoro = (): JSX.Element => {
 };
 
 export default Pomodoro;
+
+// PS! if I would write that again i would do it better

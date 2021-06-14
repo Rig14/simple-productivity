@@ -16,6 +16,7 @@ const SignUp = (): JSX.Element => {
 
   let button: JSX.Element;
 
+  // still dont know what type the "e" is
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const signUp = (e: any) => {
     if (
@@ -43,10 +44,7 @@ const SignUp = (): JSX.Element => {
 
               // todoitems empty array
               // {task: 'todo description', state: boolean, id: random float}
-              todoItems: [
-                { task: 'yea', state: false, id: 0.1 },
-                { task: 'aaa', state: true, id: 0.2 },
-              ],
+              todoItems: [],
               // pomodoro timer
               // takes time in seconds and pomodoro counter
               timer: { time: 1500, counter: 0 },
